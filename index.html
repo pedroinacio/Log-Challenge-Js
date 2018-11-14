@@ -1,133 +1,32 @@
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-<link rel="stylesheet" href="css.css">
-<div class="container">
-  <div class="row">
-    <div class="center responsive">
-      <div class="col-sm-12 col-md-10 col-md-offset-1">      	
-		<div class="form-group input-group">
-		  <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-		  <input class="form-control" type="text" id="first" name="first" placeholder="first in sequence">
+<!DOCTYPE html>
+<html>
+	<head>
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+		<link rel="stylesheet" href="css.css">
+	</head>
+	<body>
+		<div class="container">
+		  <div class="row">
+		    <div class="center responsive">
+		      <div class="col-sm-12 col-md-10 col-md-offset-1">      	
+				<div class="form-group input-group">
+				  <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+				  <input class="form-control" type="text" id="first" name="first" placeholder="first in sequence">
+				</div>
+				<div class="form-group input-group">
+				  <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+				  <input class="form-control" type="text" id="last" name="last" placeholder="Last in sequence">
+				</div>          
+				<div class="form-group">
+				  <button class="btn btn-primary" type="submit" id="submit" onclick="new Sequence(document.getElementById('first').value, document.getElementById('last').value)">Get Sequence</button>
+				</div>
+				<div class="form-group">
+					<span id="sequence"></span>
+				</div>
+		      </div>  
+		    </div>    
+		  </div>
 		</div>
-		<div class="form-group input-group">
-		  <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-		  <input class="form-control" type="text" id="last" name="last" placeholder="Last in sequence">
-		</div>          
-		<div class="form-group">
-		  <button class="btn btn-primary" type="submit" id="submit" onclick="new Sequence(document.getElementById('first').value, document.getElementById('last').value)">Get Sequence</button>
-		</div>
-		<div class="form-group">
-			<span id="sequence"></span>
-		</div>
-      </div>  
-    </div>    
-  </div>
-</div>
-
-<script type="text/javascript">
-	class Sequence {
-		constructor(first,last){
-			this._sequence = [];
-			this._first = first;
-			this._last 	= last;
-
-			for (var i = this._first; i <= this._last; i++) {
-				this._sequence.push(i);
-			}
-
-			this.applyRulesToSequence();
-		}
-
-		getSequence() 
-		{
-			return this._sequence;
-		}
-
-		applyRule1_1(number)
-		{
-			if(((number%3) == 0))
-			{
-				return true;
-			}else{
-				return false;
-			}
-		}
-
-		applyRule1_2(number)
-		{
-			if(String(number).indexOf('3') !== -1)
-			{
-				return true;
-			}else{
-				return false;
-			}
-		}
-
-		applyRule2_1(number)
-		{
-			if((number%5 == 0))
-			{
-				return true;
-			}else{
-				return false;
-			}		
-		}
-
-		applyRule2_2(number)
-		{
-			if(String(number).indexOf('5') !== -1)
-			{
-				return true;
-			}else{
-				return false;
-			}
-		}
-
-		applyRule3(number)
-		{
-			if((number%3 == 0) && (number%5 == 0))
-			{
-				return true;
-			}else{
-				return false;
-			}
-		}
-
-		applyRulesToSequence()
-		{		
-			for (var i = 0; i <= this._sequence.length; i++) {
-				if ((this.applyRule1_1(this._sequence[i]) || 
-					this.applyRule1_2(this._sequence[i]) || 
-					this.applyRule2_1(this._sequence[i]) ||
-					this.applyRule2_2(this._sequence[i])) && 
-					this.applyRule3(this._sequence[i])) {
-
-					this._sequence[i] = 'lucky';
-
-				}else if (this.applyRule1_1(this._sequence[i]) && this.applyRule1_2(this._sequence[i]) && 
-						  this.applyRule2_1(this._sequence[i]) && this.applyRule2_2(this._sequence[i])) {
-
-					this._sequence[i] = 'fizzbuzz';
-
-				}else if (this.applyRule1_1(this._sequence[i]) && this.applyRule1_2(this._sequence[i])) {
-
-					this._sequence[i] = 'fizz fizz';
-
-				}else if (this.applyRule2_1(this._sequence[i]) && this.applyRule2_2(this._sequence[i])) {
-
-					this._sequence[i] = 'buzz buzz';
-
-				}else if (this.applyRule1_1(this._sequence[i]) || this.applyRule1_2(this._sequence[i])) {
-
-					this._sequence[i] = 'fizz';
-
-				}else if (this.applyRule2_1(this._sequence[i]) || this.applyRule2_2(this._sequence[i])) {
-
-					this._sequence[i] = 'buzz';
-
-				}
-			}
-
-			document.getElementById("sequence").innerHTML = this._sequence.join(',');
-		}
-	}
-</script>
+		<script src="main.js"></script>
+	</body>
+</html>
